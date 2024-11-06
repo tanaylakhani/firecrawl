@@ -1,9 +1,10 @@
 require_relative '../lib/firecrawl'
 
-url = ARGV[ 0 ] || 'https://example.com'
-
-request = Firecrawl::ScrapeRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
-response = request.scrape( url, formats: [ :markdown, :screenshot ] )
+Firecrawl.api_key ENV[ 'FIRECRAWL_API_KEY' ]
+response = Firecrawl.scrape(  
+  ARGV[ 0 ] || 'https://example.com', 
+  formats: [ :markdown, :screenshot ] 
+)
 
 if response.success?
   result = response.result 
