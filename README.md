@@ -11,7 +11,7 @@ provide markdown information for real time information lookup as well as groundi
 require 'firecrawl'
 
 Firecrawl.api_key ENV[ 'FIRECRAWL_API_KEY' ]
-response = Firecrawl.scrape( 'https://example.com', options )
+response = Firecrawl.scrape( 'https://example.com' )
 if response.success?
   result = response.result 
   puts result.metadata[ 'title' ]
@@ -47,16 +47,18 @@ $ gem install firecrawl
 
 ### Basic Scraping
 
-The simplest way to use Firecrawl is to scrape a single page:
+The simplest way to use Firecrawl is to `scrape` which will scrape the content of a single 
+page at the given url and optionally: extract only the main content. convert it to markdown as 
+well as create a screenshot. 
 
 ```ruby
-Firecrawl.api_key ENV['FIRECRAWL_API_KEY']
-response = Firecrawl.scrape('https://example.com', format: :markdown )
+Firecrawl.api_key ENV[ 'FIRECRAWL_API_KEY' ]
+response = Firecrawl.scrape( 'https://example.com', format: :markdown )
 
 if response.success?
   result = response.result
   if result.success?
-    puts result.metadata['title']
+    puts result.metadata[ 'title' ]
     puts result.markdown
   end
 else
@@ -64,9 +66,38 @@ else
 end
 ```
 
+In this basic example we have globally set the +Firecrawl.api_key+ from the environment and then
+used the +Firecrawl.scrape+ convenience method to make a request to the Firecrawl API to scrape 
+the `https://example.com` page and return markdown ( markdown and the main content of the page 
+are actually returned by default so we could have ommitted the options entirelly ).
+
+The +Firecrawl.scrape+ method instantiates a +Firecrawl::ScrapeRequest+ instance and then calls
+it's +scrape+ method. The following is the equivalent code which makes explict use of the 
++Firecrawl::ScrapeRequest+ class.
+
+```ruby
+request = Firecrawl::ScrapeRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
+response = request.scrape( 'https://example.com', format: markdown )
+
+if response.success?
+  result = response.result
+  if result.success?
+    puts result.metadata[ 'title' ]
+    puts result.markdown
+  end
+else
+  puts response.result.error_description
+end
+```
+
+Notice also that in this example we've directly passed the +api_key+ to the individual 
+request. This is optional. If you set the key globally and omit it in the request constructor 
+the +ScrapeRequest+ instance will use the globally assigned +api_key+.
+
 ### Scrape Options
 
-You can customize scraping behavior using `ScrapeOptions`:
+You can customize scraping behavior using options, either by passing an option hash to 
++scrape+ method, as we have done above, or by building a `ScrapeOptions` instance:
 
 ```ruby
 options = Firecrawl::ScrapeOptions.build do 
@@ -78,7 +109,7 @@ options = Firecrawl::ScrapeOptions.build do
 end
 
 request = Firecrawl::ScrapeRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
-response = request.scrape('https://example.com', options)
+response = request.scrape( 'https://example.com', options )
 ```
 
 ### Batch Scraping
