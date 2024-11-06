@@ -1,6 +1,6 @@
 module FirecrawlHelper
   
-  def connection 
+  def vcr_connection 
     Faraday.new do | builder | 
       builder.adapter Faraday.default_adapter 
       builder.use VCR::Middleware::Faraday 

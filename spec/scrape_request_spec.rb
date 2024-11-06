@@ -13,7 +13,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
   }
 
   let ( :scrape_request ) {
-    described_class.new( connection: connection, api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
+    described_class.new( connection: vcr_connection, api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
   }
 
   context "where there are no scrape options" do 
