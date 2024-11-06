@@ -70,6 +70,18 @@ module Firecrawl
       end
     end 
 
+    def delete( uri, &block )
+      headers = { 
+        'Authorization' => "Bearer #{@api_key}", 
+        'Content-Type' => 'application/json'
+      }   
+
+      @connection.delete( uri ) do | request |
+        headers.each { | key, value | request.headers[ key ] = value }
+        block.call( request ) if block 
+      end
+    end 
+
   end
 
 end

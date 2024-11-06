@@ -18,6 +18,9 @@ require_relative 'firecrawl/batch_scrape_request'
 require_relative 'firecrawl/map_options'
 require_relative 'firecrawl/map_result'
 require_relative 'firecrawl/map_request'
+require_relative 'firecrawl/crawl_options'
+require_relative 'firecrawl/crawl_result'
+require_relative 'firecrawl/crawl_request'
 
 module Firecrawl
   class << self 
