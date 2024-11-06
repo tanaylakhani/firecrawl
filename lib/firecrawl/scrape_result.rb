@@ -16,6 +16,20 @@ module Firecrawl
       @success || false 
     end
 
+    def metadata 
+      unless @metadata 
+        metadata = @attributes[ :metadata ] || {}
+        @metadata = metadata.transform_keys do | key |
+          key.to_s.gsub( /([a-z])([A-Z])/, '\1_\2' ).downcase
+        end
+        # remove the camelCase forms injected by Firecrawl
+        @metadata.delete_if do | key, _ | 
+          key.start_with?( 'og_' ) && @metadata.key?( key.sub( 'og_', 'og:' ) )
+        end 
+      end 
+      @metadata 
+    end
+
     ##
     # The +markdown+ method returns scraped content that has been converted to markdown. The 
     # markdown content is present only if the request options +formats+ included +markdown+.  
@@ -64,20 +78,6 @@ module Firecrawl
     #
     def actions 
       @attributes[ :actions ] || {}
-    end
-
-    def metadata 
-      unless @metadata 
-        metadata = @attributes[ :metadata ] || {}
-        @metadata = metadata.transform_keys do | key |
-          key.to_s.gsub( /([a-z])([A-Z])/, '\1_\2' ).downcase
-        end
-        # remove the camelCase forms injected by Firecrawl
-        @metadata.delete_if do | key, _ | 
-          key.start_with?( 'og_' ) && @metadata.key?( key.sub( 'og_', 'og:' ) )
-        end 
-      end 
-      @metadata 
     end
 
     def llm_extraction 
