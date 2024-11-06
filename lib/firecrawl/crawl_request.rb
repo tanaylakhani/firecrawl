@@ -59,7 +59,7 @@ module Firecrawl
       else 
         options = {}
       end
-      options[ :url ] = url
+      options[ url ] = url
       response = post( "#{BASE_URI}/crawl", options, &block )
       result = nil 
       if response.success?
