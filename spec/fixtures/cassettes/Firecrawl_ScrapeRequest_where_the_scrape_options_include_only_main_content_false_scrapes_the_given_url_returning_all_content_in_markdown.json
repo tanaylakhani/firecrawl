@@ -42,7 +42,7 @@
             "W/\"84e-0KYxHX2nNpKaHn93G1g2vOdkWL8\""
           ],
           "date": [
-            "Wed, 06 Nov 2024 04:58:16 GMT"
+            "Wed, 06 Nov 2024 19:30:29 GMT"
           ],
           "via": [
             "1.1 google"
@@ -56,7 +56,7 @@
           "string": "{\"success\":true,\"data\":{\"markdown\":\"[![Homepage](https://www.iana.org/_img/2022/iana-logo-header.svg)](/)\\n\\n- [Domains](/domains)\\n- [Protocols](/protocols)\\n- [Numbers](/numbers)\\n- [About](/about)\\n\\n# Example Domains\\n\\nAs described in [RFC 2606](/go/rfc2606) and [RFC 6761](/go/rfc6761), a\\nnumber of domains such as example.com and example.org are maintained\\nfor documentation purposes. These domains may be used as illustrative\\nexamples in documents without prior coordination with us. They are not\\navailable for registration or transfer.\\n\\nWe provide a web service on the example domain hosts to provide basic\\ninformation on the purpose of the domain. These web services are\\nprovided as best effort, but are not designed to support production\\napplications. While incidental traffic for incorrectly configured\\napplications is expected, please do not design applications that require\\nthe example domains to have operating HTTP service.\\n\\n## Further Reading\\n\\n- [IANA-managed Reserved Domains](/domains/reserved)\\n\\nLast revised 2017-05-13.\\n\\n|     |     |\\n| --- | --- |\\n| [Domain Names](/domains) | - [Root Zone Registry](/domains/root)<br>- [.INT Registry](/domains/int)<br>- [.ARPA Registry](/domains/arpa)<br>- [IDN Repository](/domains/idn-tables) |\\n| [Number Resources](/numbers) | - [Abuse Information](/abuse) |\\n| [Protocols](/protocols) | - [Protocol Registries](/protocols)<br>- [Time Zone Database](/time-zones) |\\n| [About Us](/about) | - [Performance](/performance)<br>- [Reports](/reports)<br>- [Reviews](/reviews)<br>- [Excellence](/about/excellence)<br>- [Contact Us](/contact) |\\n\\nThe IANA functions coordinate the Internet’s globally unique identifiers, and\\nare provided by [Public Technical Identifiers](http://pti.icann.org), an affiliate of\\n[ICANN](http://www.icann.org/).\\n\\n- [Privacy Policy](https://www.icann.org/privacy/policy)\\n- [Terms of Service](https://www.icann.org/privacy/tos)\",\"metadata\":{\"title\":\"Example Domains\",\"ogLocaleAlternate\":[],\"viewport\":\"width=device-width, initial-scale=1\",\"sourceURL\":\"https://www.iana.org/help/example-domains\",\"statusCode\":200}}}"
         }
       },
-      "recorded_at": "Wed, 06 Nov 2024 04:58:16 GMT"
+      "recorded_at": "Wed, 06 Nov 2024 19:30:30 GMT"
     }
   ],
   "recorded_with": "VCR 6.3.1"

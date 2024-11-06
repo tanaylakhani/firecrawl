@@ -1,0 +1,63 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://api.firecrawl.dev/v1/scrape",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"formats\":[\"html\",\"markdown\",\"screenshot\"],\"onlyMainContent\":true,\"url\":\"https://www.iana.org/help/example-domains\"}"
+        },
+        "headers": {
+          "User-Agent": [
+            "Faraday v2.12.0"
+          ],
+          "Authorization": [
+            "Bearer <TOKEN>"
+          ],
+          "Content-Type": [
+            "application/json"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "x-powered-by": [
+            "Express"
+          ],
+          "access-control-allow-origin": [
+            "*"
+          ],
+          "content-type": [
+            "application/json; charset=utf-8"
+          ],
+          "content-length": [
+            "2422"
+          ],
+          "etag": [
+            "W/\"976-Nga6OLyjk4O24nC7tqSeWHzBT6s\""
+          ],
+          "date": [
+            "Wed, 06 Nov 2024 19:30:40 GMT"
+          ],
+          "via": [
+            "1.1 google"
+          ],
+          "alt-svc": [
+            "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"success\":true,\"data\":{\"markdown\":\"# Example Domains\\n\\nAs described in [RFC 2606](/go/rfc2606) and [RFC 6761](/go/rfc6761), a\\nnumber of domains such as example.com and example.org are maintained\\nfor documentation purposes. These domains may be used as illustrative\\nexamples in documents without prior coordination with us. They are not\\navailable for registration or transfer.\\n\\nWe provide a web service on the example domain hosts to provide basic\\ninformation on the purpose of the domain. These web services are\\nprovided as best effort, but are not designed to support production\\napplications. While incidental traffic for incorrectly configured\\napplications is expected, please do not design applications that require\\nthe example domains to have operating HTTP service.\\n\\n## Further Reading\\n\\n- [IANA-managed Reserved Domains](/domains/reserved)\\n\\nLast revised 2017-05-13.\",\"html\":\"<!DOCTYPE html><html>\\n\\n<body>\\n\\n\\n\\n<div id=\\\"body\\\">\\n\\n\\n<article class=\\\"hemmed sidenav\\\">\\n\\n    <main>\\n    \\n<div class=\\\"help-article\\\">\\n\\n<h1>Example Domains</h1>\\n<p>As described in <a href=\\\"/go/rfc2606\\\">RFC 2606</a> and <a href=\\\"/go/rfc6761\\\">RFC 6761</a>, a\\nnumber of domains such as example.com and example.org are maintained\\nfor documentation purposes. These domains may be used as illustrative\\nexamples in documents without prior coordination with us. They are not\\navailable for registration or transfer.</p>\\n<p>We provide a web service on the example domain hosts to provide basic\\ninformation on the purpose of the domain. These web services are\\nprovided as best effort, but are not designed to support production\\napplications. While incidental traffic for incorrectly configured\\napplications is expected, please do not design applications that require\\nthe example domains to have operating HTTP service.</p>\\n<h2>Further Reading</h2>\\n<ul>\\n<li><a href=\\\"/domains/reserved\\\">IANA-managed Reserved Domains</a></li>\\n</ul>\\n\\n<div class=\\\"last-updated\\\">Last revised 2017-05-13.</div>\\n\\n\\n</div>\\n\\n    </main>\\n\\n    \\n\\n</article>\\n\\n\\n</div>\\n\\n\\n\\n\\n\\n\\n\\n\\n</body></html>\",\"screenshot\":\"https://service.firecrawl.dev/storage/v1/object/public/media/screenshot-ad3402bd-5843-4c1a-90ec-daea589a9c18.png\",\"metadata\":{\"title\":\"Example Domains\",\"ogLocaleAlternate\":[],\"viewport\":\"width=device-width, initial-scale=1\",\"sourceURL\":\"https://www.iana.org/help/example-domains\",\"statusCode\":200}}}"
+        }
+      },
+      "recorded_at": "Wed, 06 Nov 2024 19:30:40 GMT"
+    }
+  ],
+  "recorded_with": "VCR 6.3.1"
+}

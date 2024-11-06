@@ -1,0 +1,63 @@
+{
+  "http_interactions": [
+    {
+      "request": {
+        "method": "post",
+        "uri": "https://api.firecrawl.dev/v1/scrape",
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"formats\":[\"screenshot@fullPage\"],\"url\":\"https://www.iana.org/help/example-domains\"}"
+        },
+        "headers": {
+          "User-Agent": [
+            "Faraday v2.12.0"
+          ],
+          "Authorization": [
+            "Bearer <TOKEN>"
+          ],
+          "Content-Type": [
+            "application/json"
+          ]
+        }
+      },
+      "response": {
+        "status": {
+          "code": 200,
+          "message": "OK"
+        },
+        "headers": {
+          "x-powered-by": [
+            "Express"
+          ],
+          "access-control-allow-origin": [
+            "*"
+          ],
+          "content-type": [
+            "application/json; charset=utf-8"
+          ],
+          "content-length": [
+            "337"
+          ],
+          "etag": [
+            "W/\"151-qk+QjQcho8wlaZbL14i9dRBByrw\""
+          ],
+          "date": [
+            "Wed, 06 Nov 2024 19:30:38 GMT"
+          ],
+          "via": [
+            "1.1 google"
+          ],
+          "alt-svc": [
+            "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+          ]
+        },
+        "body": {
+          "encoding": "UTF-8",
+          "string": "{\"success\":true,\"data\":{\"screenshot\":\"https://service.firecrawl.dev/storage/v1/object/public/media/screenshot-9beb4cbd-06c9-49d6-b0a3-4c3ec8261e04.png\",\"metadata\":{\"title\":\"Example Domains\",\"ogLocaleAlternate\":[],\"viewport\":\"width=device-width, initial-scale=1\",\"sourceURL\":\"https://www.iana.org/help/example-domains\",\"statusCode\":200}}}"
+        }
+      },
+      "recorded_at": "Wed, 06 Nov 2024 19:30:38 GMT"
+    }
+  ],
+  "recorded_with": "VCR 6.3.1"
+}
