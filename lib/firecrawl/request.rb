@@ -28,8 +28,6 @@ module Firecrawl
   # 
   class Request 
 
-    DEFAULT_CONNECTION = Faraday.new { | builder | builder.adapter Faraday.default_adapter }
-
     BASE_URI = 'https://api.firecrawl.dev/v1'
 
     ##
@@ -37,7 +35,7 @@ module Firecrawl
     # and optionally a (Faraday) +connection+.
     #
     def initialize( connection: nil, api_key: nil )
-      @connection = connection || DEFAULT_CONNECTION
+      @connection = connection || Firecrawl.connection
       @api_key = api_key || Firecrawl.api_key
       raise ArgumentError, "An 'api_key' is required unless configured using 'Firecrawl.api_key'." \
         unless @api_key

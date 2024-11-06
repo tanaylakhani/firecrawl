@@ -22,9 +22,10 @@ require_relative 'firecrawl/crawl_options'
 require_relative 'firecrawl/crawl_result'
 require_relative 'firecrawl/crawl_request'
 
+require_relative 'firecrawl/module_methods'
+
 module Firecrawl
-  class << self 
-    attr_accessor :api_key 
-  end
+  extend ModuleMethods
 end
+
 
