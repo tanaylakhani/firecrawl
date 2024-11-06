@@ -9,7 +9,7 @@ module Firecrawl
 
     schema do 
       # note: both format and formats are defined as a semantic convenience
-      format            String, as: :formats, array: true, in: FORMATS 
+      format            String, as: :formats, array: true, in: FORMATS
       formats           String, array: true, in: FORMATS 
       only_main_content [ TrueClass, FalseClass ], as: :onlyMainContent 
       include_tags      String, as: :includeTags, array: true 
@@ -17,7 +17,7 @@ module Firecrawl
       wait_for          Integer 
       timeout           Integer 
       extract           do 
-        #schema          Hash
+        schema          Hash
         system_prompt   String, as: :systemPrompt
         prompt          String
       end 
