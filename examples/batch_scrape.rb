@@ -10,19 +10,20 @@ end
 
 urls = [ "https://example.org", "https://www.iana.org/help/example-domains", "https://www.firecrawl.dev" ]
 
-response = request.start_scraping( urls, options )
+response = request.scrape( urls, options )
 while response.success?
   batch_result = response.result 
   batch_result.scrape_results.each do | result |
     puts 'Title: ' + ( result.metadata[ 'title' ] || '' )
+    puts 'URL: ' + ( result.metadata[ 'source_url' ] || '' )
     puts 'Screenshot: ' + result.screenshot_url
     puts '---'
     puts result.markdown
     puts "\n\n"
   end 
   break unless batch_result.status?( :scraping ) 
-  sleep 0.250
-  response = request.retrieve_scraping( batch_result )
+  sleep 0.500
+  response = request.retrieve_scrape_results( batch_result )
 end 
 
 unless response.success?

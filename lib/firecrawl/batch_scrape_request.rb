@@ -3,8 +3,8 @@ module Firecrawl
   ##
   # The +BatchScrapeRequest+ class encapsulates a batch scrape request to the Firecrawl API. 
   # After creating a new +BatchScrapeRequest+ instance you can begin batch scraping by calling 
-  # the +begin_scraping+ method and then subsequently evaluate the results by calling the  
-  # +continue_scraping' method.
+  # the +scrape+ method and then subsequently retrieve the results by calling the 
+  # +retrieve_scrape_results' method.
   #
   # === examples
   # 
@@ -18,7 +18,7 @@ module Firecrawl
   #   only_main_content     true
   # end
   # 
-  # batch_response = request.beging_scraping( urls, options )
+  # batch_response = request.scrape( urls, options )
   # while response.success?
   #   batch_result = batch_response.result 
   #   if batch_result.success?
@@ -30,17 +30,18 @@ module Firecrawl
   #     end
   #   end
   #   break unless batch_result.status?( :scraping )
+  #   batch_response = request.retrieve_scrape_results( batch_result )
   # end
   #
-  # unless response.success? 
-  #   puts response.result.error_description 
+  # unless batch_response.success? 
+  #   puts batch_response.result.error_description 
   # end 
   # 
   class BatchScrapeRequest < Request 
 
     ## 
-    # The +start_scraping+ method makes a Firecrawl '/batch/scrape' POST request which will 
-    # initiate batch scraping of the given urls. 
+    # The +scrape+ method makes a Firecrawl '/batch/scrape/{id}' POST request which will initiate 
+    # batch scraping of the given urls. 
     # 
     # The response is always an instance of +Faraday::Response+. If +response.success?+ is true,
     # then +response.result+ will be an instance +BatchScrapeResult+. If the request is not 
@@ -50,7 +51,7 @@ module Firecrawl
     # successful and then +response.result.success?+ to validate that the API processed the
     # request successfuly. 
     #
-    def start_scraping( urls, options = nil, &block )        
+    def scrape( urls, options = nil, &block )        
       if options
         options = options.is_a?( ScrapeOptions ) ? options : ScrapeOptions.build( options.to_h ) 
         options = options.to_h
@@ -58,7 +59,6 @@ module Firecrawl
         options = {}
       end
       options[ :urls ] = [ urls ].flatten
-
       response = post( "#{BASE_URI}/batch/scrape", options, &block )
       result = nil 
       if response.success?
@@ -73,10 +73,11 @@ module Firecrawl
     end 
 
     ## 
-    # The +retrieve_scraping+ method makes a Firecrawl '/batch/scrape' GET request which will 
-    # retrieve batch scraping results. Note that there is no guarantee that there are any batch 
-    # scraping results at the time of the call and you may need to call this method multiple 
-    # times.
+    # The +retrieve_scrape_results+ method makes a Firecrawl '/batch/scrape' GET request which 
+    # will return the scrape results that were completed since the previous call to this method
+    # ( or, if this is the first call to this method, since the batch scrape was started ). Note 
+    # that there is no guarantee that there are any new batch scrape results at the time you make 
+    # this call ( scrape_results may be empty ).
     # 
     # The response is always an instance of +Faraday::Response+. If +response.success?+ is +true+, 
     # then +response.result+ will be an instance +BatchScrapeResult+. If the request is not 
@@ -86,10 +87,10 @@ module Firecrawl
     # successful and then +response.result.success?+ to validate that the API processed the
     # request successfuly. 
     #
-    def retrieve_scraping( batch_result, &block )
+    def retrieve_scrape_results( batch_result, &block )
       raise ArgumentError, "The first argument must be an instance of BatchScrapeResult." \
         unless batch_result.is_a?( BatchScrapeResult )
-      response = get( batch_result.next_url, &block )  
+      response = get( batch_result.url, &block )  
       result = nil 
       if response.success? 
         attributes = ( JSON.parse( response.body, symbolize_names: true ) rescue nil )
