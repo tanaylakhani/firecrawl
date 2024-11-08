@@ -5,7 +5,7 @@ module Firecrawl
     
     def initialize( status_code, attributes = nil )
       @error_code, @error_description = status_code_to_error( status_code )
-      @error_description = attributes[ :error ] if @attributes&.respond_to?( :[] )
+      @error_description = attributes[ :error ] if attributes&.respond_to?( :[] )
     end 
 
   private 

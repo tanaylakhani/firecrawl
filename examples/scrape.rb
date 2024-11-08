@@ -7,7 +7,7 @@ options = Firecrawl::ScrapeOptions.build do
   only_main_content     true
 end
 
-response = request.scrape( ARGV[ 0 ] || 'https://example.com', options )
+response = request.submit( ARGV[ 0 ] || 'https://example.com', options )
 if response.success?
   result = response.result 
   puts 'Title: ' + ( result.metadata[ 'title' ] || '' )

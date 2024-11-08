@@ -10,7 +10,7 @@ end
 
 urls = [ "https://example.org", "https://www.iana.org/help/example-domains", "https://www.firecrawl.dev" ]
 
-response = request.scrape( urls, options )
+response = request.submit( urls, options )
 while response.success?
   batch_result = response.result 
   batch_result.scrape_results.each do | result |
@@ -23,7 +23,7 @@ while response.success?
   end 
   break unless batch_result.status?( :scraping ) 
   sleep 0.500
-  response = request.retrieve_scrape_results( batch_result )
+  response = request.retrieve( batch_result )
 end 
 
 unless response.success?

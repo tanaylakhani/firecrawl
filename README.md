@@ -47,9 +47,9 @@ $ gem install firecrawl
 
 ### Scraping
 
-The simplest way to use Firecrawl is to `scrape` which will scrape the content of a single 
-page at the given url and optionally: extract only the main content. convert it to markdown as 
-well as create a screenshot. 
+The simplest way to use Firecrawl is to `scrape`, which will scrape the content of a single page
+at the given url and optionally convert it to markdown as well as create a screenshot. You can 
+chose to scrape the entire page or only the main content.
 
 ```ruby
 Firecrawl.api_key ENV[ 'FIRECRAWL_API_KEY' ]
@@ -69,15 +69,15 @@ end
 In this basic example we have globally set the `Firecrawl.api_key` from the environment and then
 used the `Firecrawl.scrape` convenience method to make a request to the Firecrawl API to scrape 
 the `https://example.com` page and return markdown ( markdown and the main content of the page 
-are actually returned by default so we could have ommitted the options entirelly ).
+are returned by default so we could have ommitted the options entirelly ).
 
 The `Firecrawl.scrape` method instantiates a `Firecrawl::ScrapeRequest` instance and then calls
-it's `scrape` method. The following is the equivalent code which makes explict use of the 
+it's `submit` method. The following is the equivalent code which makes explict use of the 
 `Firecrawl::ScrapeRequest` class.
 
 ```ruby
 request = Firecrawl::ScrapeRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
-response = request.scrape( 'https://example.com', format: markdown )
+response = request.submit( 'https://example.com', format: markdown )
 
 if response.success?
   result = response.result
@@ -90,14 +90,14 @@ else
 end
 ```
 
-Notice also that in this example we've directly passed the `api_key` to the individual 
-request. This is optional. If you set the key globally and omit it in the request constructor 
-the +ScrapeRequest+ instance will use the globally assigned `api_key`.
+Notice also that in this example we've directly passed the `api_key` to the individual request. 
+This is optional. If you set the key globally and omit it in the request constructor the 
+`ScrapeRequest` instance will use the globally assigned `api_key`.
 
 #### Scrape Options
 
 You can customize scraping behavior using options, either by passing an option hash to 
-`scrape` method, as we have done above, or by building a `ScrapeOptions` instance:
+`submit` method, as we have done above, or by building a `ScrapeOptions` instance:
 
 ```ruby
 options = Firecrawl::ScrapeOptions.build do 
@@ -109,7 +109,7 @@ options = Firecrawl::ScrapeOptions.build do
 end
 
 request = Firecrawl::ScrapeRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
-response = request.scrape( 'https://example.com', options )
+response = request.submit( 'https://example.com', options )
 ```
 
 #### Scrape Response
@@ -118,11 +118,11 @@ The `Firecrawl` gem is based on the `Faraday` gem, which permits you to customiz
 orchestration, up to and including changing the actual HTTP implementation used to make the 
 request. See Connections below for additional details.
 
-Any `Firecrawl` request, including the `scrape` method as used above, will thus return a 
+Any `Firecrawl` request, including the `submit` method as used above, will thus return a 
 `Faraday::Response`. This response includes a `success?` method which indicates if the request 
 was successful. If the request was successful, the `response.result` method will be an instance 
 of `Firecrawl::ScrapeResult` that will encapsulate the scraping result. This instance, in turn, 
-has a `success?` method which will return +true+ if +Firecrawl+ successfully scraped the page. 
+has a `success?` method which will return `true` if Firecrawl successfully scraped the page. 
 
 A successful result will include html, markdown, screenshot, as well as any action and llm 
 results and related metadata. 
@@ -144,7 +144,7 @@ options = Firecrawl::ScrapeOptions.build do
   only_main_content true
 end
 
-response = request.scrape( urls, options )
+response = request.submit( urls, options )
 while response.success?
   batch_result = response.result
   batch_result.scrape_results.each do |result|
@@ -154,7 +154,7 @@ while response.success?
   end
   break unless batch_result.status?( :scraping )
   sleep 0.5
-  response = request.retrieve_scrape_results( batch_result )
+  response = request.retrieve( batch_result )
 end
 ```
 
@@ -170,7 +170,7 @@ options = Firecrawl::MapOptions.build do
   ignore_subdomains true
 end
 
-response = request.map( 'https://example.com', options )
+response = request.submit( 'https://example.com', options )
 if response.success?
   result = response.result
   result.links.each do |link|
@@ -195,16 +195,16 @@ options = Firecrawl::CrawlOptions.build do
   end
 end
 
-response = request.crawl( 'https://example.com', options )
+response = request.submit( 'https://example.com', options )
 while response.success?
   crawl_result = response.result
-  crawl_result.scrape_results.each do |result|
-    puts result.metadata['title']
+  crawl_result.scrape_results.each do | result |
+    puts result.metadata[ 'title' ]
     puts result.markdown
   end
-  break unless crawl_result.status?(:scraping)
+  break unless crawl_result.status?( :scraping )
   sleep 0.5
-  response = request.retrieve_crawl_results(crawl_result)
+  response = request.retrieve( crawl_result )
 end
 ```
 
@@ -222,7 +222,7 @@ be one of:
 ### Working with Results
 
 ```ruby
-response = request.scrape(url, options)
+response = request.submit(url, options)
 if response.success?
   result = response.result
   if result.success?

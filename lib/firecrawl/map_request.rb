@@ -10,7 +10,7 @@ module Firecrawl
   #
   # request = Firecrawl::MapRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' )
   #
-  # response = request.map( 'https://example.com', { limit: 100 } )
+  # response = request.submit( 'https://example.com', { limit: 100 } )
   # if response.success?
   #   result = response.result 
   #   if result.success? 
@@ -25,14 +25,14 @@ module Firecrawl
   class MapRequest < Request 
 
     ## 
-    # The +map+ method makes a Firecrawl '/map' POST request which will scrape the site with 
-    # given url. 
+    # The +submit+ method makes a Firecrawl '/map' POST request which will scrape the site with 
+    # given url and return links to all hosted pages related to that url. 
     # 
     # The response is always an instance of +Faraday::Response+. If +response.success?+ is true,
     # then +response.result+ will be an instance +MapResult+. If the request is not successful 
     # then +response.result+ will be an instance of +ErrorResult+.
     #
-    def map( url, options = nil, &block )    
+    def submit( url, options = nil, &block )    
       if options
         options = options.is_a?( MapOptions ) ? options : MapOptions.build( options.to_h ) 
         options = options.to_h

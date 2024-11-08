@@ -18,7 +18,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
 
   context "where there are no scrape options" do 
     it "scrapes the given url, returning main content in markdown" do 
-      response = scrape_request.scrape( url )
+      response = scrape_request.submit( url )
 
       expect( response ).to be_a( Faraday::Response )
       expect( response.success? ).to be( true ), response_error_description( response )     
@@ -52,7 +52,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
     }
 
     it "scrapes the given url returning all content in markdown" do 
-      response = scrape_request.scrape( url, options )
+      response = scrape_request.submit( url, options )
 
       expect( response ).to be_a( Faraday::Response )
       expect( response.success? ).to be( true ), response_error_description( response )     
@@ -85,7 +85,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
     }
 
     it "scrapes the given url, returning main content in markdown" do 
-      response = scrape_request.scrape( url )
+      response = scrape_request.submit( url )
 
       expect( response ).to be_a( Faraday::Response )
       expect( response.success? ).to be( true ), response_error_description( response )     
@@ -121,7 +121,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
       }
 
       it "scrapes the given url, returning all content in html" do 
-        response = scrape_request.scrape( url, options )
+        response = scrape_request.submit( url, options )
 
         expect( response ).to be_a( Faraday::Response )
         expect( response.success? ).to be( true ), response_error_description( response )     
@@ -155,7 +155,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
       }
 
       it "scrapes the given url, returning main content in html" do 
-        response = scrape_request.scrape( url, options )
+        response = scrape_request.submit( url, options )
 
         expect( response ).to be_a( Faraday::Response )
         expect( response.success? ).to be( true ), response_error_description( response )     
@@ -192,7 +192,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
       }
 
       it "scrapes the given url, returning all content in html and markdown" do 
-        response = scrape_request.scrape( url, options )
+        response = scrape_request.submit( url, options )
 
         expect( response ).to be_a( Faraday::Response )
         expect( response.success? ).to be( true ), response_error_description( response )     
@@ -229,7 +229,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
       }
 
       it "scrapes the given url, returning main content in html and markdown" do 
-        response = scrape_request.scrape( url, options )
+        response = scrape_request.submit( url, options )
 
         expect( response ).to be_a( Faraday::Response )
         expect( response.success? ).to be( true ), response_error_description( response )     
@@ -267,7 +267,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
     }
 
     it "scrapes the given url, returning a screenshot" do 
-      response = scrape_request.scrape( url, options )
+      response = scrape_request.submit( url, options )
 
       expect( response ).to be_a( Faraday::Response )
       expect( response.success? ).to be( true ), response_error_description( response )     
@@ -299,7 +299,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
     }
 
     it "scrapes the given url, returning a screenshot" do 
-      response = scrape_request.scrape( url, options )
+      response = scrape_request.submit( url, options )
 
       expect( response ).to be_a( Faraday::Response )
       expect( response.success? ).to be( true ), response_error_description( response )     
@@ -333,7 +333,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
       }
 
       it "scrapes the given url, returning all content in html, markdown and the screenshot" do 
-        response = scrape_request.scrape( url, options )
+        response = scrape_request.submit( url, options )
 
         expect( response ).to be_a( Faraday::Response )
         expect( response.success? ).to be( true ), response_error_description( response )     
@@ -371,7 +371,7 @@ RSpec.describe Firecrawl::ScrapeRequest do
       }
 
       it "scrapes the given url, returning main content in html, markdown, and the screenshot" do 
-        response = scrape_request.scrape( url, options )
+        response = scrape_request.submit( url, options )
 
         expect( response ).to be_a( Faraday::Response )
         expect( response.success? ).to be( true ), response_error_description( response )      

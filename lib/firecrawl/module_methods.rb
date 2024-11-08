@@ -12,7 +12,7 @@ module Firecrawl
     end  
 
     def scrape( url, options = nil, &block )
-      Firecrawl::ScrapeRequest.new.scrape( url, options, &block ) 
+      Firecrawl::ScrapeRequest.new.submit( url, options, &block ) 
     end  
   end
 end

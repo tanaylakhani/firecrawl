@@ -12,7 +12,7 @@ options = Firecrawl::CrawlOptions.build do
   end
 end
 
-response = request.crawl( ARGV[ 0 ] || 'https://www.iana.org', options )
+response = request.submit( ARGV[ 0 ] || 'https://www.iana.org', options )
 while response.success?
   crawl_result = response.result 
   crawl_result.scrape_results.each do | result |
@@ -25,7 +25,7 @@ while response.success?
   end 
   break unless crawl_result.status?( :scraping ) 
   sleep 0.500
-  response = request.retrieve_crawl_results( crawl_result )
+  response = request.retrieve( crawl_result )
 end 
 
 unless response.success?

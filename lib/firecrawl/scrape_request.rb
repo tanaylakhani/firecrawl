@@ -1,7 +1,7 @@
 module Firecrawl 
   ##
   # The +ScrapeRequest+ class encapsulates a '/scrape' POST request to the Firecrawl API. After 
-  # creating a new +ScrapeRequest+ instance you can initiate the request by calling the +scrape+ 
+  # creating a new +ScrapeRequest+ instance you can initiate the request by calling the +submit+ 
   # method to perform synchronous scraping.  
   #
   # === examples
@@ -15,7 +15,7 @@ module Firecrawl
   #   only_main_content     true
   # end
   #
-  # response = request.scrape( 'https://example.com', options )
+  # response = request.submit( 'https://example.com', options )
   # if response.success?
   #   result = response.result 
   #   puts response.metadata[ 'title ] 
@@ -28,13 +28,13 @@ module Firecrawl
   class ScrapeRequest < Request 
 
     ## 
-    # The +scrape+ method makes a Firecrawl '/scrape' POST request which will scrape the given url. 
+    # The +submit+ method makes a Firecrawl '/scrape' POST request which will scrape the given url. 
     # 
     # The response is always an instance of +Faraday::Response+. If +response.success?+ is true,
     # then +response.result+ will be an instance +ScrapeResult+. If the request is not successful 
     # then +response.result+ will be an instance of +ErrorResult+.
     #
-    def scrape( url, options = nil, &block )    
+    def submit( url, options = nil, &block )    
       if options
         options = options.is_a?( ScrapeOptions ) ? options : ScrapeOptions.build( options.to_h ) 
         options = options.to_h
