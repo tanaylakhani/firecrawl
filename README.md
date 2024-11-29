@@ -77,7 +77,7 @@ it's `submit` method. The following is the equivalent code which makes explict u
 
 ```ruby
 request = Firecrawl::ScrapeRequest.new( api_key: ENV[ 'FIRECRAWL_API_KEY' ] )
-response = request.submit( 'https://example.com', format: markdown )
+response = request.submit( 'https://example.com', format: :markdown )
 
 if response.success?
   result = response.result
@@ -205,41 +205,6 @@ while response.success?
   break unless crawl_result.status?( :scraping )
   sleep 0.5
   response = request.retrieve( crawl_result )
-end
-```
-
-## Response Structure
-
-All Firecrawl requests return a Faraday response with an added `result` method. The result will 
-be one of:
-
-- `ScrapeResult`: Contains the scraped content and metadata
-- `BatchScrapeResult`: Contains multiple scrape results
-- `MapResult`: Contains discovered links
-- `CrawlResult`: Contains scrape results from crawled pages
-- `ErrorResult`: Contains error information if the request failed
-
-### Working with Results
-
-```ruby
-response = request.submit(url, options)
-if response.success?
-  result = response.result
-  if result.success?
-    # Access scraped content
-    puts result.metadata['title']
-    puts result.markdown
-    puts result.html
-    puts result.raw_html
-    puts result.screenshot_url
-    puts result.links
-    
-    # Check for warnings
-    puts result.warning if result.warning
-  end
-else
-  error = response.result
-  puts "#{error.error_type}: #{error.error_description}"
 end
 ```
 
