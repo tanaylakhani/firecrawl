@@ -24,10 +24,10 @@ Gem::Specification.new do | spec |
 #    'documentation_uri' => 'https://github.com/EndlessInternational/firecrawl'
   }
 
-  spec.required_ruby_version = '>= 3.0'
+  spec.required_ruby_version = '>= 2.7'
   spec.files            = Dir[ "lib/**/*.rb", "LICENSE", "README.md", "firecrawl.gemspec" ]
   spec.require_paths    = [ "lib" ]
-
+  spec.add_runtime_dependency 'base64'
   spec.add_runtime_dependency 'faraday', '~> 2.7'
   spec.add_runtime_dependency 'dynamicschema', '~> 1.0.0.beta04'
 
